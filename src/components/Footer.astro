@@ -1,0 +1,94 @@
+---
+const year = new Date().getFullYear();
+
+const links = {
+  Services: [
+    { label: 'Computer & Laptop Care', href: '/services#computer' },
+    { label: 'New Device Setup', href: '/services#setup' },
+    { label: 'Smartphone & Tablet', href: '/services#smartphone' },
+    { label: 'Home Wi-Fi & Networking', href: '/services#wifi' },
+    { label: 'Smart Home & Entertainment', href: '/services#smarthome' },
+    { label: 'Online Safety', href: '/services#safety' },
+  ],
+  Company: [
+    { label: 'About', href: '/about' },
+    { label: 'Pricing', href: '/pricing' },
+    { label: 'Blog', href: '/blog' },
+    { label: 'Contact', href: '/contact' },
+  ],
+  Legal: [
+    { label: 'Privacy Policy', href: '/privacy' },
+    { label: 'Terms of Service', href: '/terms' },
+  ],
+};
+---
+
+<footer class="border-t border-white/8 mt-24">
+  <div class="max-w-6xl mx-auto px-6 py-16">
+
+    <!-- Top row: brand + links -->
+    <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_auto_auto] gap-12 md:gap-16">
+
+      <!-- Brand -->
+      <div class="flex flex-col gap-4 max-w-xs">
+        <a href="/" class="flex items-center gap-2.5" aria-label="Giganephew home">
+          <img src="/logo.svg" alt="" aria-hidden="true" class="h-9 w-9 rounded-lg" />
+          <span class="font-bold text-[#F0EFEB] tracking-tight">Giganephew</span>
+        </a>
+        <p class="text-sm text-[#8A8A96] leading-relaxed">
+          Expert in-home tech support for families and individuals.
+          25+ years of experience, one visit at a time.
+        </p>
+        <a
+          href="/contact"
+          class="inline-flex items-center gap-2 text-sm font-semibold text-[#22D3EE]
+                 hover:text-[#38bdf8] transition-colors duration-300 w-fit"
+        >
+          Book a visit
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Link columns -->
+      {Object.entries(links).map(([group, items]) => (
+        <div class="flex flex-col gap-3">
+          <p class="eyebrow text-[#8A8A96]">{group}</p>
+          <ul class="flex flex-col gap-2.5">
+            {items.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class="text-sm text-[#8A8A96] hover:text-[#F0EFEB]
+                         transition-colors duration-300"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <!-- Bottom row: copyright + parent company -->
+    <div class="mt-16 pt-6 border-t border-white/8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <p class="text-xs text-[#8A8A96]">
+        &copy; {year} Giganephew. All rights reserved.
+      </p>
+      <p class="text-xs text-[#8A8A96]">
+        A service of{' '}
+        <a
+          href="https://omnicorex.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-[#8A8A96] hover:text-[#F0EFEB] underline underline-offset-2 transition-colors duration-300"
+        >
+          Omnicorex
+        </a>
+      </p>
+    </div>
+
+  </div>
+</footer>

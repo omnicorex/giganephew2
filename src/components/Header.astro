@@ -1,0 +1,192 @@
+---
+const navLinks = [
+  { label: 'Services', href: '/services' },
+  { label: 'About', href: '/about' },
+  { label: 'Pricing', href: '/pricing' },
+  { label: 'Blog', href: '/blog' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<!-- Floating pill nav — detached from top, not edge-to-edge sticky -->
+<header class="fixed top-0 left-0 right-0 z-40 flex justify-center pt-5 px-4">
+  <nav
+    id="nav-pill"
+    aria-label="Main navigation"
+    class="flex items-center gap-1 px-2 py-2 rounded-full
+           border border-white/10
+           bg-[#0C0C0E]/80
+           backdrop-blur-xl
+           shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.06)]
+           transition-all duration-500"
+    style="cubic-bezier(0.32, 0.72, 0, 1)"
+  >
+    <!-- Logo -->
+    <a
+      href="/"
+      class="flex items-center gap-2.5 pl-2 pr-3 py-1.5 rounded-full
+             hover:bg-white/5
+             transition-colors duration-300"
+      aria-label="Giganephew home"
+    >
+      <img src="/logo.svg" alt="" aria-hidden="true" class="h-8 w-8 rounded-lg" />
+      <span class="font-bold text-sm text-[#F0EFEB] tracking-tight hidden sm:block">Giganephew</span>
+    </a>
+
+    <!-- Divider -->
+    <div class="w-px h-5 bg-white/10 mx-1"></div>
+
+    <!-- Desktop nav links -->
+    <div class="hidden md:flex items-center gap-1">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class={`px-4 py-2 rounded-full text-sm font-medium
+                  transition-all duration-300
+                  ${currentPath.startsWith(link.href)
+                    ? 'bg-white/10 text-[#F0EFEB]'
+                    : 'text-[#8A8A96] hover:text-[#F0EFEB] hover:bg-white/5'
+                  }`}
+          aria-current={currentPath.startsWith(link.href) ? 'page' : undefined}
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+
+    <!-- CTA Button — button-in-button pattern -->
+    <a
+      href="/contact"
+      class="hidden md:flex items-center gap-2 ml-2 pl-4 pr-2 py-2 rounded-full
+             bg-[#22D3EE] text-[#0C0C0E]
+             text-sm font-semibold
+             group
+             transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]
+             hover:bg-[#38bdf8]
+             active:scale-[0.98]"
+    >
+      Get Help
+      <!-- Trailing icon inside its own circle -->
+      <span class="w-6 h-6 rounded-full bg-black/15 flex items-center justify-center
+                   transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]
+                   group-hover:translate-x-0.5 group-hover:-translate-y-px">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+          <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+    </a>
+
+    <!-- Mobile hamburger -->
+    <button
+      id="menu-toggle"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      class="md:hidden ml-2 w-9 h-9 rounded-full bg-white/5 flex flex-col items-center justify-center gap-1.5
+             transition-colors duration-300 hover:bg-white/10"
+    >
+      <span class="hamburger-line block w-4 h-px bg-[#F0EFEB] transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] origin-center"></span>
+      <span class="hamburger-line block w-4 h-px bg-[#F0EFEB] transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] origin-center"></span>
+    </button>
+  </nav>
+</header>
+
+<!-- Mobile menu overlay -->
+<div
+  id="mobile-menu"
+  role="dialog"
+  aria-label="Navigation menu"
+  aria-modal="true"
+  class="fixed inset-0 z-30 flex flex-col justify-center px-8
+         bg-[#0C0C0E]/95 backdrop-blur-2xl
+         opacity-0 pointer-events-none
+         transition-opacity duration-400 ease-[cubic-bezier(0.32,0.72,0,1)]"
+>
+  <nav class="flex flex-col gap-2">
+    {navLinks.map((link, i) => (
+      <a
+        href={link.href}
+        class={`mobile-nav-link text-4xl font-bold py-3
+                opacity-0 translate-y-8
+                transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]
+                ${currentPath.startsWith(link.href)
+                  ? 'text-[#22D3EE]'
+                  : 'text-[#F0EFEB] hover:text-[#22D3EE]'
+                }`}
+        style={`transition-delay: ${i * 60}ms`}
+        aria-current={currentPath.startsWith(link.href) ? 'page' : undefined}
+      >
+        {link.label}
+      </a>
+    ))}
+
+    <a
+      href="/contact"
+      class="mobile-nav-link mt-6 inline-flex items-center gap-3 text-xl font-semibold
+             text-[#22D3EE]
+             opacity-0 translate-y-8
+             transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]"
+      style={`transition-delay: ${navLinks.length * 60}ms`}
+    >
+      Get Help
+      <svg width="16" height="16" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+        <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </nav>
+</div>
+
+<script>
+  const toggle = document.getElementById('menu-toggle')!;
+  const menu = document.getElementById('mobile-menu')!;
+  const lines = document.querySelectorAll<HTMLElement>('.hamburger-line');
+  const navLinks = document.querySelectorAll<HTMLElement>('.mobile-nav-link');
+  let isOpen = false;
+
+  function openMenu() {
+    isOpen = true;
+    menu.classList.remove('opacity-0', 'pointer-events-none');
+    menu.classList.add('opacity-100');
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', 'Close menu');
+    document.body.style.overflow = 'hidden';
+
+    // Hamburger → X morph
+    lines[0].style.transform = 'translateY(3.5px) rotate(45deg)';
+    lines[1].style.transform = 'translateY(-3.5px) rotate(-45deg)';
+
+    // Staggered link reveal
+    navLinks.forEach((link) => {
+      link.classList.remove('opacity-0', 'translate-y-8');
+    });
+  }
+
+  function closeMenu() {
+    isOpen = false;
+    menu.classList.add('opacity-0', 'pointer-events-none');
+    menu.classList.remove('opacity-100');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Open menu');
+    document.body.style.overflow = '';
+
+    // X → hamburger
+    lines[0].style.transform = '';
+    lines[1].style.transform = '';
+
+    // Reset links
+    navLinks.forEach((link) => {
+      link.classList.add('opacity-0', 'translate-y-8');
+    });
+  }
+
+  toggle.addEventListener('click', () => (isOpen ? closeMenu() : openMenu()));
+
+  // Close on nav link click
+  navLinks.forEach((link) => link.addEventListener('click', closeMenu));
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isOpen) closeMenu();
+  });
+</script>

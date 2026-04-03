@@ -1,0 +1,39 @@
+# Astro build output
+dist/
+.astro/
+
+# Dependencies
+node_modules/
+
+# Environment variables — never commit these
+.env
+.env.*
+!.env.example
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Source files not needed in repo (PSD, AI, zip archives)
+*.psd
+*.ai
+*.zip
+
+# Claude Code local config
+.claude/
+.agents/
+
+# Reference site — local only, not part of the redesign codebase
+github-jill88-website6/

@@ -1,0 +1,240 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const values = [
+  {
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>`,
+    title: 'Patience, not pressure',
+    desc: 'We explain things clearly, at your pace. No rushing, no condescension.',
+  },
+  {
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+    title: 'Honest advice',
+    desc: 'We tell you what actually needs fixing — and what doesn\'t.',
+  },
+  {
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+    title: 'One person, every time',
+    desc: 'You work directly with Aram — no rotating technicians, no call center.',
+  },
+  {
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
+    title: 'Real expertise',
+    desc: '25+ years working with technology across residential and enterprise environments.',
+  },
+];
+---
+
+<BaseLayout
+  title="About — Giganephew In-Home Tech Support"
+  description="Meet Aram, the founder of Giganephew. 25+ years of tech experience, dedicated to making technology work for everyday people."
+>
+
+  <!-- Hero -->
+  <section class="pt-40 pb-20 px-6 relative overflow-hidden">
+    <div
+      class="absolute top-0 right-0 w-[50vw] h-[60vh] pointer-events-none"
+      style="background: radial-gradient(ellipse at 80% 20%, rgba(34,211,238,0.06) 0%, transparent 70%)"
+      aria-hidden="true"
+    ></div>
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-col gap-4 max-w-2xl reveal">
+        <span class="eyebrow">Our story</span>
+        <h1 class="heading-1 text-[#F0EFEB]">
+          Built on the belief that technology should work for people — not the other way around.
+        </h1>
+      </div>
+    </div>
+  </section>
+
+  <!-- Founder section -->
+  <section class="px-6 pb-24" aria-labelledby="founder-heading">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+
+        <!-- Photo card -->
+        <div class="card-bezel reveal">
+          <div class="card-inner overflow-hidden relative min-h-[480px] flex items-end">
+            <!-- Profile photo -->
+            <img
+              src="/profile-photo.jpg"
+              alt="Aram, founder of Giganephew"
+              class="absolute inset-0 w-full h-full object-cover object-top"
+              loading="eager"
+            />
+            <!-- Bottom gradient for text legibility -->
+            <div
+              class="absolute inset-0"
+              style="background: linear-gradient(to top, rgba(12,12,14,0.9) 0%, transparent 50%)"
+              aria-hidden="true"
+            ></div>
+            <div class="relative z-10 p-6 flex flex-col gap-1">
+              <span class="text-lg font-bold text-[#F0EFEB]">Aram</span>
+              <span class="text-xs text-[#8A8A96]">Founder, Giganephew</span>
+              <div class="flex gap-3 mt-3">
+                <a
+                  href="https://www.linkedin.com/in/aramc/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="px-3 py-1.5 rounded-full text-xs font-medium border border-white/10 text-[#8A8A96]
+                         hover:text-[#F0EFEB] hover:border-white/20 transition-all duration-300"
+                  aria-label="Aram's LinkedIn profile"
+                >
+                  LinkedIn
+                </a>
+                <a
+                  href="https://omnicorex.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="px-3 py-1.5 rounded-full text-xs font-medium border border-white/10 text-[#8A8A96]
+                         hover:text-[#F0EFEB] hover:border-white/20 transition-all duration-300"
+                >
+                  Omnicorex
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Story copy -->
+        <div class="flex flex-col gap-6 reveal" style="transition-delay: 100ms">
+          <h2 class="heading-2 text-[#F0EFEB]" id="founder-heading">
+            Meet the founder
+          </h2>
+
+          <div class="flex flex-col gap-4 text-[#8A8A96] leading-relaxed">
+            <p>
+              Giganephew was founded by Aram — a tech professional with over 25 years of experience
+              working across residential and enterprise environments. The name comes from the idea
+              of having a knowledgeable nephew who actually shows up to help.
+            </p>
+            <p>
+              After years building solutions for businesses and government through his firm
+              <a href="https://omnicorex.com" target="_blank" rel="noopener noreferrer"
+                 class="text-[#F0EFEB] underline underline-offset-2 hover:text-[#22D3EE] transition-colors duration-300">
+                Omnicorex
+              </a>,
+              Aram saw that individuals and families were largely left behind. The same technology
+              complications that large organizations had whole IT departments to handle were landing
+              on regular people with no support at all.
+            </p>
+            <p>
+              Giganephew exists to fill that gap. Every visit is personal, direct, and focused on
+              the person — not just the device.
+            </p>
+          </div>
+
+          <!-- Values grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+            {values.map((v) => (
+              <div class="flex flex-col gap-2 p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+                <div class="flex items-center gap-2 text-[#22D3EE]">
+                  <Fragment set:html={v.icon} />
+                  <span class="text-sm font-semibold text-[#F0EFEB]">{v.title}</span>
+                </div>
+                <p class="text-xs text-[#8A8A96] leading-relaxed">{v.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Parent company -->
+  <section class="px-6 pb-24 border-t border-white/8 pt-20">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_480px] gap-12 items-center">
+        <div class="flex flex-col gap-5 reveal">
+          <span class="eyebrow">Parent company</span>
+          <h2 class="heading-2 text-[#F0EFEB]">
+            Backed by enterprise experience
+          </h2>
+          <p class="text-[#8A8A96] leading-relaxed">
+            Giganephew is a service of
+            <a href="https://omnicorex.com" target="_blank" rel="noopener noreferrer"
+               class="text-[#F0EFEB] underline underline-offset-2 hover:text-[#22D3EE] transition-colors duration-300">
+              Omnicorex
+            </a>
+            — a technology firm serving corporate and government clients. The same depth of expertise
+            that goes into enterprise-level work is applied to every home visit.
+          </p>
+          <p class="text-[#8A8A96] leading-relaxed">
+            You're not getting a weekend freelancer. You're getting a professional with a proven
+            track record, operating with the same care and accountability as a business client would expect.
+          </p>
+        </div>
+
+        <div class="card-bezel reveal" style="transition-delay: 100ms">
+          <div class="card-inner p-8 flex flex-col gap-4">
+            <p class="text-xs text-[#8A8A96] uppercase tracking-widest font-medium">A service of</p>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="2" y="7" width="20" height="14" rx="2"/>
+                  <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+                  <line x1="12" y1="12" x2="12" y2="16"/>
+                  <line x1="10" y1="14" x2="14" y2="14"/>
+                </svg>
+              </div>
+              <div>
+                <p class="font-bold text-[#F0EFEB]">Omnicorex</p>
+                <p class="text-xs text-[#8A8A96]">Corporate & government tech solutions</p>
+              </div>
+            </div>
+            <div class="border-t border-white/8 pt-4 flex flex-col gap-2">
+              <a
+                href="https://omnicorex.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-[#8A8A96] hover:text-[#22D3EE] transition-colors duration-300 flex items-center gap-1.5"
+              >
+                omnicorex.com
+                <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <a
+                href="https://omnicorex.com/portfolio"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-[#8A8A96] hover:text-[#22D3EE] transition-colors duration-300 flex items-center gap-1.5"
+              >
+                Portfolio
+                <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="px-6 pb-28">
+    <div class="max-w-6xl mx-auto text-center flex flex-col items-center gap-5 reveal">
+      <h2 class="heading-2 text-[#F0EFEB] max-w-md">
+        Ready to get help?
+      </h2>
+      <a
+        href="/contact"
+        class="group inline-flex items-center gap-2 pl-5 pr-2 py-2.5 rounded-full
+               bg-[#22D3EE] text-[#0C0C0E] font-semibold text-sm
+               transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]
+               hover:bg-[#38bdf8] active:scale-[0.98]"
+      >
+        Book a visit
+        <span class="w-7 h-7 rounded-full bg-black/15 flex items-center justify-center
+                     transition-transform duration-300
+                     group-hover:translate-x-0.5 group-hover:-translate-y-px">
+          <svg width="13" height="13" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+  </section>
+
+</BaseLayout>

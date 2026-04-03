@@ -1,0 +1,250 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const categories = [
+  {
+    id: 'computer',
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>`,
+    title: 'Computer & Laptop Care',
+    summary: 'Your computer is the center of your digital life. When it slows down, crashes, or stops working right, everything suffers. We diagnose and fix it — on-site, no shipping required.',
+    services: [
+      { name: 'Performance tune-up & cleanup', desc: 'Sluggish startup, freezing apps, high fan noise — we find the cause and fix it.' },
+      { name: 'Virus & malware removal', desc: 'Full system scan, threat removal, and recommendations to prevent reinfection.' },
+      { name: 'Software installation & troubleshooting', desc: 'Any program — install, configure, or get it working again.' },
+      { name: 'Windows & macOS updates', desc: 'Updates gone wrong, stuck downloads, broken features after an update.' },
+      { name: 'Printer setup & connectivity', desc: 'Wired, wireless, or Bluetooth printers — we get them talking to your computer.' },
+      { name: 'Storage cleanup & organization', desc: 'Free up space, remove duplicates, organize your files logically.' },
+      { name: 'Data backup solutions', desc: 'Set up automatic local or cloud backups so you never lose important files.' },
+    ],
+  },
+  {
+    id: 'setup',
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>`,
+    title: 'New Device Setup',
+    summary: 'You bought something new — now what? We take care of the full setup so you can start using it right away, with everything exactly how you need it.',
+    services: [
+      { name: 'New computer or laptop setup', desc: 'Out-of-the-box to fully ready: accounts, preferences, apps, security.' },
+      { name: 'Data & file transfer', desc: 'Move everything from your old device — files, photos, documents, bookmarks.' },
+      { name: 'Account configuration', desc: 'Email, iCloud, Google, Microsoft — set up and syncing across your devices.' },
+      { name: 'App installation & personalization', desc: 'Your essential apps installed, organized, and configured the way you like.' },
+      { name: 'Smart TV initial setup', desc: 'Connect to Wi-Fi, log into your streaming accounts, configure picture settings.' },
+      { name: 'Tablet setup (iPad & Android)', desc: 'Full setup including app transfer from your previous device.' },
+    ],
+  },
+  {
+    id: 'smartphone',
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>`,
+    title: 'Smartphone & Tablet Help',
+    summary: 'iPhones and Androids are powerful — and complicated. Whether you just upgraded or have had your phone for years, we can help you get more out of it.',
+    services: [
+      { name: 'iPhone & Android setup', desc: 'New phone setup including transfer from your previous device.' },
+      { name: 'Contact, photo & calendar sync', desc: 'Get everything syncing properly across phone, tablet, and computer.' },
+      { name: 'Storage cleanup & optimization', desc: "Free up space, manage photos, clear out what you don't need." },
+      { name: 'App troubleshooting', desc: 'Apps crashing, not loading, or behaving unexpectedly — diagnosed and fixed.' },
+      { name: 'Battery & performance optimization', desc: 'Adjust settings to extend battery life and speed up a sluggish phone.' },
+      { name: 'Parental controls & screen time', desc: 'Set up content filters, time limits, and family sharing features.' },
+      { name: 'Two-factor authentication help', desc: 'Locked out of an account or need help setting up 2FA properly.' },
+    ],
+  },
+  {
+    id: 'wifi',
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor" stroke="none"/></svg>`,
+    title: 'Home Wi-Fi & Networking',
+    summary: 'Bad Wi-Fi affects everything in your home. We trace the problem to its source and fix it — whether it\'s your router, your ISP, or just where everything is positioned.',
+    services: [
+      { name: 'Wi-Fi performance diagnosis', desc: 'Identify what\'s causing slow speeds, drops, or dead zones.' },
+      { name: 'Router & modem setup', desc: 'New equipment configured and optimized for your home.' },
+      { name: 'Dead zone elimination', desc: 'Extenders, access points, or mesh system recommendations and setup.' },
+      { name: 'Device connection troubleshooting', desc: 'Specific devices not connecting or staying connected — resolved.' },
+      { name: 'Network security setup', desc: 'Strong passwords, guest networks, and firmware updates.' },
+      { name: 'ISP troubleshooting', desc: 'Help identifying and communicating issues with your internet provider.' },
+    ],
+  },
+  {
+    id: 'smarthome',
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
+    title: 'Smart Home & Entertainment',
+    summary: 'Smart home devices are amazing when they work. We set them up properly so everything connects, talks to each other, and actually does what it\'s supposed to.',
+    services: [
+      { name: 'Streaming service setup', desc: 'Netflix, Disney+, Hulu, Max, Prime — accounts configured and accessible.' },
+      { name: 'Smart TV & soundbar configuration', desc: 'Picture modes, sound settings, app logins, remote programming.' },
+      { name: 'Smart speakers (Alexa & Google Home)', desc: 'Setup, routines, device grouping, and home automation basics.' },
+      { name: 'Video doorbell & security cameras', desc: 'Ring, Nest, Arlo — installation guidance, app setup, motion zones.' },
+      { name: 'Smart thermostat setup', desc: 'Nest, Ecobee, or other smart thermostats — installed and scheduled.' },
+      { name: 'Smart lighting setup', desc: 'Philips Hue, Kasa, and other smart bulbs — paired and integrated.' },
+      { name: 'Device casting & screen mirroring', desc: 'Cast from phone or laptop to your TV, troubleshoot Chromecast or AirPlay.' },
+    ],
+  },
+  {
+    id: 'safety',
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+    title: 'Online Safety & Scam Protection',
+    summary: 'Online scams are more sophisticated than ever, and they specifically target people who aren\'t expecting them. We give you the knowledge and tools to stay safe.',
+    services: [
+      { name: 'Security health checkup', desc: 'Full audit of your accounts, devices, and settings for vulnerabilities.' },
+      { name: 'Virus & spyware removal', desc: 'Detect and remove malicious software that\'s already on your device.' },
+      { name: 'Scam awareness coaching', desc: 'Learn to recognize phishing emails, fake tech support calls, and common fraud.' },
+      { name: 'Password manager setup', desc: 'Set up and populate a password manager — no more sticky notes.' },
+      { name: 'Antivirus installation & configuration', desc: 'Choose and set up the right antivirus for your needs.' },
+      { name: 'Privacy settings audit', desc: 'Review and tighten privacy settings on browsers, social media, and apps.' },
+      { name: 'Two-factor authentication setup', desc: 'Add an extra layer of security to your most important accounts.' },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Services — Giganephew In-Home Tech Support"
+  description="Full catalog of in-home tech support services — computers, smartphones, Wi-Fi, smart home, and online safety. We come to you."
+>
+
+  <!-- Page hero -->
+  <section class="pt-40 pb-20 px-6 relative overflow-hidden">
+    <div
+      class="absolute top-0 left-1/2 -translate-x-1/2 w-[60vw] h-[40vh] pointer-events-none"
+      style="background: radial-gradient(ellipse at 50% 0%, rgba(34,211,238,0.06) 0%, transparent 70%)"
+      aria-hidden="true"
+    ></div>
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-col gap-4 max-w-2xl reveal">
+        <span class="eyebrow">What we offer</span>
+        <h1 class="heading-1 text-[#F0EFEB]">Services</h1>
+        <p class="text-lg text-[#8A8A96] leading-relaxed">
+          Six categories covering everything in your home that runs on electricity and connects to the internet.
+          We come to you — no shipping, no drop-off, no waiting on hold.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Jump nav -->
+  <nav class="sticky top-20 z-20 px-6 mb-8" aria-label="Service categories">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex gap-2 overflow-x-auto pb-2 scrollbar-none">
+        {categories.map((cat) => (
+          <a
+            href={`#${cat.id}`}
+            class="shrink-0 px-4 py-2 rounded-full text-xs font-medium
+                   border border-white/10 text-[#8A8A96]
+                   hover:text-[#F0EFEB] hover:border-white/20
+                   transition-all duration-300 whitespace-nowrap"
+          >
+            {cat.title}
+          </a>
+        ))}
+      </div>
+    </div>
+  </nav>
+
+  <!-- Service categories -->
+  <div class="px-6 pb-28">
+    <div class="max-w-6xl mx-auto flex flex-col gap-6">
+      {categories.map((cat, i) => (
+        <section
+          id={cat.id}
+          aria-labelledby={`${cat.id}-heading`}
+          class="card-bezel reveal scroll-mt-32"
+        >
+          <div class="card-inner p-8 md:p-10">
+            <div class="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-10">
+
+              <!-- Left: category header -->
+              <div class="flex flex-col gap-4">
+                <div
+                  class="w-12 h-12 rounded-2xl flex items-center justify-center text-[#22D3EE]"
+                  style="background: rgba(34,211,238,0.08)"
+                  aria-hidden="true"
+                >
+                  <Fragment set:html={cat.icon} />
+                </div>
+                <h2 class="heading-2 text-[#F0EFEB]" id={`${cat.id}-heading`}>
+                  {cat.title}
+                </h2>
+                <p class="text-sm text-[#8A8A96] leading-relaxed">
+                  {cat.summary}
+                </p>
+                <a
+                  href="/contact"
+                  class="group inline-flex items-center gap-2 mt-2 pl-4 pr-2 py-2 rounded-full
+                         bg-[#22D3EE] text-[#0C0C0E] font-semibold text-xs w-fit
+                         transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]
+                         hover:bg-[#38bdf8] active:scale-[0.98]"
+                >
+                  Book this service
+                  <span class="w-5 h-5 rounded-full bg-black/15 flex items-center justify-center
+                               transition-transform duration-300
+                               group-hover:translate-x-0.5 group-hover:-translate-y-px">
+                    <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                      <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                </a>
+              </div>
+
+              <!-- Right: service list -->
+              <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3" role="list">
+                {cat.services.map((svc) => (
+                  <li class="flex flex-col gap-1 p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]
+                              hover:bg-white/[0.05] hover:border-white/10
+                              transition-all duration-300">
+                    <span class="text-sm font-semibold text-[#F0EFEB] flex items-center gap-2">
+                      <span class="w-1 h-1 rounded-full bg-[#22D3EE] shrink-0" aria-hidden="true"></span>
+                      {svc.name}
+                    </span>
+                    <span class="text-xs text-[#8A8A96] leading-relaxed pl-3">
+                      {svc.desc}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+            </div>
+          </div>
+        </section>
+      ))}
+    </div>
+  </div>
+
+  <!-- Bottom CTA -->
+  <section class="px-6 pb-28">
+    <div class="max-w-6xl mx-auto">
+      <div class="card-bezel reveal">
+        <div
+          class="card-inner px-8 py-14 text-center flex flex-col items-center gap-5 relative overflow-hidden"
+          style="background: linear-gradient(135deg, #141418 0%, #1a1a22 100%)"
+        >
+          <div
+            class="absolute inset-0 pointer-events-none"
+            style="background: radial-gradient(ellipse at 50% 100%, rgba(34,211,238,0.07) 0%, transparent 65%)"
+            aria-hidden="true"
+          ></div>
+          <span class="eyebrow relative z-10">Don't see exactly what you need?</span>
+          <h2 class="heading-2 text-[#F0EFEB] relative z-10 max-w-lg">
+            Just describe your problem — we'll figure it out.
+          </h2>
+          <p class="text-[#8A8A96] text-sm max-w-sm relative z-10">
+            Every tech situation is different. Reach out and tell us what's going on.
+          </p>
+          <a
+            href="/contact"
+            class="group relative z-10 inline-flex items-center gap-2 pl-5 pr-2 py-2.5 rounded-full
+                   bg-[#22D3EE] text-[#0C0C0E] font-semibold text-sm
+                   transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]
+                   hover:bg-[#38bdf8] active:scale-[0.98]
+                   shadow-[0_0_32px_rgba(34,211,238,0.2)]"
+          >
+            Contact us
+            <span class="w-7 h-7 rounded-full bg-black/15 flex items-center justify-center
+                         transition-transform duration-300
+                         group-hover:translate-x-0.5 group-hover:-translate-y-px">
+              <svg width="13" height="13" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

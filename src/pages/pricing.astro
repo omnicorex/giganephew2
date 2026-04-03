@@ -1,0 +1,206 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const plans = [
+  {
+    name: 'Quick Fix',
+    price: '89',
+    duration: 'Up to 1 hour',
+    desc: 'For straightforward issues that just need a knowledgeable eye.',
+    highlight: false,
+    items: [
+      'Single issue diagnosis & resolution',
+      'Software or settings troubleshooting',
+      'Device connection problems',
+      'Quick printer or Wi-Fi fix',
+      'Phone or app assistance',
+    ],
+    cta: 'Book a Quick Fix',
+  },
+  {
+    name: 'Standard Visit',
+    price: '149',
+    duration: 'Up to 2 hours',
+    desc: 'The most common visit type — plenty of time to get things properly sorted.',
+    highlight: true,
+    items: [
+      'Everything in Quick Fix',
+      'Multiple issues in one visit',
+      'New device setup & configuration',
+      'Data transfer from old device',
+      'Full network diagnosis & fix',
+      'Hands-on walkthrough when done',
+    ],
+    cta: 'Book a Standard Visit',
+  },
+  {
+    name: 'Extended Session',
+    price: '229',
+    duration: 'Up to 4 hours',
+    desc: 'For larger projects that need dedicated time — a new computer, a smart home setup, or a full security overhaul.',
+    highlight: false,
+    items: [
+      'Everything in Standard Visit',
+      'Full computer or smart home setup',
+      'Complete security & privacy audit',
+      'Multi-device setup & sync',
+      'In-depth training & coaching',
+      'Follow-up support call included',
+    ],
+    cta: 'Book an Extended Session',
+  },
+];
+
+const faqs = [
+  {
+    q: 'What if my problem takes less time than the plan covers?',
+    a: 'You only pay for the plan you book. If we finish early, we\'ll use the remaining time to check for anything else or walk you through your device — no wasted visit.',
+  },
+  {
+    q: 'What if it takes longer than expected?',
+    a: 'We\'ll let you know before going over. Additional time is billed at $75/hour in 30-minute increments.',
+  },
+  {
+    q: 'Is there a travel or service fee?',
+    a: 'No hidden fees. The price you see is what you pay. Travel within our service area is included.',
+  },
+  {
+    q: 'Do you offer ongoing support?',
+    a: 'Yes — reach out to discuss a recurring arrangement if you\'d like regular check-ins or priority availability.',
+  },
+  {
+    q: 'What forms of payment do you accept?',
+    a: 'Cash, check, Venmo, Zelle, and major credit cards.',
+  },
+];
+---
+
+<BaseLayout
+  title="Pricing — Giganephew In-Home Tech Support"
+  description="Simple, transparent pricing for in-home tech support. No hourly surprises — book a visit and we handle the rest."
+>
+
+  <!-- Hero -->
+  <section class="pt-40 pb-20 px-6 relative overflow-hidden">
+    <div
+      class="absolute top-0 left-1/2 -translate-x-1/2 w-[60vw] h-[50vh] pointer-events-none"
+      style="background: radial-gradient(ellipse at 50% 0%, rgba(34,211,238,0.06) 0%, transparent 70%)"
+      aria-hidden="true"
+    ></div>
+    <div class="max-w-6xl mx-auto text-center flex flex-col items-center gap-4 reveal">
+      <span class="eyebrow">Transparent pricing</span>
+      <h1 class="heading-1 text-[#F0EFEB] max-w-xl">
+        Simple visits.<br />No surprises.
+      </h1>
+      <p class="text-[#8A8A96] leading-relaxed max-w-md">
+        Pick the visit length that fits your situation. All prices are flat-rate —
+        you know exactly what you're paying before we arrive.
+      </p>
+    </div>
+  </section>
+
+  <!-- Pricing cards -->
+  <section class="px-6 pb-20" aria-label="Pricing plans">
+    <div class="max-w-5xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {plans.map((plan, i) => (
+          <div
+            class={`card-bezel reveal flex flex-col
+                    ${plan.highlight ? 'ring-1 ring-[rgba(34,211,238,0.3)]' : ''}`}
+            style={`transition-delay: ${i * 80}ms`}
+          >
+            <div
+              class={`card-inner p-6 flex flex-col gap-5 h-full
+                      ${plan.highlight ? 'bg-[#161620]' : ''}`}
+            >
+              <!-- Badge for recommended -->
+              {plan.highlight && (
+                <div class="self-start px-3 py-1 rounded-full bg-[rgba(34,211,238,0.12)] border border-[rgba(34,211,238,0.25)]">
+                  <span class="text-[10px] font-semibold text-[#22D3EE] uppercase tracking-widest">Most popular</span>
+                </div>
+              )}
+
+              <!-- Plan name & price -->
+              <div class="flex flex-col gap-1">
+                <h2 class="font-bold text-[#F0EFEB] text-lg">{plan.name}</h2>
+                <div class="flex items-baseline gap-1">
+                  <span class="text-4xl font-bold text-[#F0EFEB] tracking-tight">${plan.price}</span>
+                </div>
+                <span class="text-xs text-[#22D3EE] font-medium">{plan.duration}</span>
+              </div>
+
+              <p class="text-sm text-[#8A8A96] leading-relaxed">{plan.desc}</p>
+
+              <!-- Divider -->
+              <div class="border-t border-white/8"></div>
+
+              <!-- Features -->
+              <ul class="flex flex-col gap-2.5 flex-1" role="list">
+                {plan.items.map((item) => (
+                  <li class="flex items-start gap-2.5 text-sm text-[#8A8A96]">
+                    <svg class="w-4 h-4 text-[#22D3EE] shrink-0 mt-0.5" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                      <path d="M3 8l3.5 3.5L13 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <!-- CTA — pinned to bottom -->
+              <a
+                href="/contact"
+                class={`group mt-2 inline-flex items-center justify-center gap-2 pl-5 pr-2 py-2.5 rounded-full
+                        font-semibold text-sm
+                        transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]
+                        active:scale-[0.98]
+                        ${plan.highlight
+                          ? 'bg-[#22D3EE] text-[#0C0C0E] hover:bg-[#38bdf8]'
+                          : 'bg-white/5 text-[#F0EFEB] border border-white/10 hover:bg-white/10'
+                        }`}
+              >
+                {plan.cta}
+                <span class={`w-7 h-7 rounded-full flex items-center justify-center
+                               transition-transform duration-300
+                               group-hover:translate-x-0.5 group-hover:-translate-y-px
+                               ${plan.highlight ? 'bg-black/15' : 'bg-white/10'}`}>
+                  <svg width="13" height="13" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                    <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <p class="text-center text-xs text-[#8A8A96] mt-6 reveal">
+        Additional time billed at $75/hr in 30-min increments &middot; No travel fee within service area
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="px-6 pb-28 border-t border-white/8 pt-20" aria-labelledby="faq-heading">
+    <div class="max-w-3xl mx-auto">
+      <div class="flex flex-col gap-3 mb-12 reveal">
+        <span class="eyebrow">Common questions</span>
+        <h2 class="heading-2 text-[#F0EFEB]" id="faq-heading">Pricing, answered.</h2>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        {faqs.map((faq, i) => (
+          <div
+            class="card-bezel reveal"
+            style={`transition-delay: ${i * 60}ms`}
+          >
+            <div class="card-inner px-6 py-5 flex flex-col gap-2">
+              <h3 class="font-semibold text-[#F0EFEB] text-sm">{faq.q}</h3>
+              <p class="text-sm text-[#8A8A96] leading-relaxed">{faq.a}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

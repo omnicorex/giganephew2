@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const updated = 'April 2, 2026';
+---
+
+<BaseLayout
+  title="Terms of Service — Giganephew"
+  description="Terms and conditions for Giganephew in-home tech support services."
+>
+  <section class="pt-40 pb-28 px-6">
+    <div class="max-w-2xl mx-auto">
+      <div class="flex flex-col gap-3 mb-12 reveal">
+        <span class="eyebrow">Legal</span>
+        <h1 class="heading-1 text-[#F0EFEB]">Terms of Service</h1>
+        <p class="text-xs text-[#8A8A96]">Last updated: {updated}</p>
+      </div>
+
+      <div class="flex flex-col gap-8 text-[#8A8A96] leading-relaxed text-sm reveal">
+
+        <div class="flex flex-col gap-3">
+          <h2 class="text-base font-semibold text-[#F0EFEB]">Services</h2>
+          <p>Giganephew provides in-home technology support services to residential clients. Services are performed by appointment. By booking a visit, you agree to these terms.</p>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <h2 class="text-base font-semibold text-[#F0EFEB]">Scheduling and cancellation</h2>
+          <p>Please provide at least 24 hours notice if you need to cancel or reschedule a visit. Late cancellations or no-shows may be subject to a $35 cancellation fee.</p>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <h2 class="text-base font-semibold text-[#F0EFEB]">Payment</h2>
+          <p>Payment is due at the time of service. We accept cash, check, Venmo, Zelle, and major credit cards. Prices are listed on our pricing page and confirmed at booking.</p>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <h2 class="text-base font-semibold text-[#F0EFEB]">Scope of work</h2>
+          <p>We will make reasonable efforts to resolve the issue described at booking. If additional issues are discovered during the visit, we will discuss options with you before proceeding. We do not perform hardware repairs.</p>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <h2 class="text-base font-semibold text-[#F0EFEB]">Data and privacy</h2>
+          <p>We treat your personal data and device contents with strict confidentiality. See our <a href="/privacy" class="text-[#F0EFEB] underline underline-offset-2 hover:text-[#22D3EE] transition-colors duration-300">Privacy Policy</a> for full details.</p>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <h2 class="text-base font-semibold text-[#F0EFEB]">Limitation of liability</h2>
+          <p>Giganephew is not responsible for data loss, hardware failure, or pre-existing conditions discovered during a visit. We strongly recommend backing up your data before any service visit. Our liability is limited to the cost of the service performed.</p>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <h2 class="text-base font-semibold text-[#F0EFEB]">Satisfaction</h2>
+          <p>If you are not satisfied with the outcome of a visit, contact us within 48 hours and we will work to make it right, including a return visit at no additional charge for the same issue where applicable.</p>
+        </div>
+
+        <div class="border-t border-white/8 pt-6">
+          <p>Questions? <a href="/contact" class="text-[#F0EFEB] underline underline-offset-2 hover:text-[#22D3EE] transition-colors duration-300">Contact us.</a></p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</BaseLayout>
