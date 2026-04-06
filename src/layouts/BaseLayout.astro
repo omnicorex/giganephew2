@@ -65,10 +65,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://giganeph
     <!-- Accessibility: skip to main content -->
     <a href="#main-content" class="skip-link">Skip to content</a>
 
-    <!-- Fixed ambient glow — behind all content, never clipped by section boundaries -->
+    <!-- Fixed ambient glow — above all compositor layers via mix-blend-mode: screen.
+         Screen-blending a low-opacity teal is invisible on text/cards (dark bg barely
+         changes) but fills dark voids with ambient color, bypassing GPU layer isolation. -->
     <div
       class="fixed pointer-events-none"
-      style="top: -35%; right: -25%; width: 90vw; height: 90vw; z-index: 0; background: radial-gradient(ellipse at center, rgba(34,211,238,0.07) 0%, rgba(34,211,238,0.025) 35%, rgba(34,211,238,0.005) 60%, transparent 75%)"
+      style="top: -35%; right: -25%; width: 90vw; height: 90vw; z-index: 60; mix-blend-mode: screen; background: radial-gradient(ellipse at center, rgba(34,211,238,0.09) 0%, rgba(34,211,238,0.04) 35%, rgba(34,211,238,0.01) 60%, transparent 75%)"
       aria-hidden="true"
     ></div>
 

@@ -125,7 +125,7 @@ const stats = [
 
   <!-- ── Services Conveyor ─────────────────────────────────────────────── -->
   <div id="conveyor-wrapper" style="height: 600vh;">
-    <div id="conveyor-sticky" class="sticky top-0 overflow-hidden" style="height: 100dvh;">
+    <div id="conveyor-sticky" class="sticky top-0" style="height: 100dvh;">
 
       <div id="conveyor-inner">
 
@@ -191,23 +191,19 @@ const stats = [
           </a>
         </div>
 
-        <!-- Card conveyor viewport -->
-        <div id="conveyor-viewport" class="relative overflow-hidden">
-
-          <!-- Fade masks -->
-          <div class="fade-mask-top absolute top-0 inset-x-0 z-10 pointer-events-none"
-               style="background: linear-gradient(to bottom, #0C0C0E 30%, transparent 100%);"></div>
-          <div class="fade-mask-bottom absolute bottom-0 inset-x-0 z-10 pointer-events-none"
-               style="background: linear-gradient(to top, #0C0C0E 30%, transparent 100%);"></div>
+        <!-- Card conveyor viewport — mask-image fades cards at edges so the
+             page background (incl. ambient glow) shows through seamlessly.
+             clip-path clips the track without forcing a GPU compositor layer. -->
+        <div id="conveyor-viewport" class="relative">
 
           <!-- Card track — JS drives translateY -->
-          <div id="cards-track" class="absolute w-full" style="will-change: transform;">
+          <div id="cards-track" class="absolute w-full">
             {services.map((service, i) => (
               <a
                 href={`/services#${service.id}`}
                 class="service-card card-bezel block"
                 data-index={String(i)}
-                style="margin-bottom: 16px; will-change: transform, opacity; transition: opacity 0.5s cubic-bezier(0.32,0.72,0,1), transform 0.5s cubic-bezier(0.32,0.72,0,1);"
+                style="margin-bottom: 16px; transition: opacity 0.5s cubic-bezier(0.32,0.72,0,1), transform 0.5s cubic-bezier(0.32,0.72,0,1);"
               >
                 <div class="card-inner service-card-inner flex items-center gap-5 px-5 md:px-7">
                   <!-- Icon -->
@@ -296,10 +292,27 @@ const stats = [
       margin-top: 0.25rem;
     }
 
-    /* Viewport: takes all remaining height on mobile */
+    /* Viewport: takes all remaining height on mobile.
+       clip-path clips the track without creating an opaque GPU layer.
+       mask-image fades cards at edges so the ambient glow shows through. */
     #conveyor-viewport {
       flex: 1;
-      min-height: 0; /* allow flex child to shrink */
+      min-height: 0;
+      clip-path: inset(0);
+      -webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        black 28%,
+        black 72%,
+        transparent 100%
+      );
+      mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        black 28%,
+        black 72%,
+        transparent 100%
+      );
     }
 
     /* Card inner height — mobile */
@@ -320,11 +333,6 @@ const stats = [
       font-size: 0.72rem;
     }
 
-    /* Fade masks — taller on mobile to hide scroll padding above/below edge cards */
-    .fade-mask-top,
-    .fade-mask-bottom {
-      height: 130px;
-    }
 
     /* ── Desktop overrides (md: 768px+) ── */
     @media (min-width: 768px) {
@@ -381,6 +389,21 @@ const stats = [
       #conveyor-viewport {
         flex: none;
         height: 100dvh;
+        clip-path: inset(0);
+        -webkit-mask-image: linear-gradient(
+          to bottom,
+          transparent 0%,
+          black 22%,
+          black 78%,
+          transparent 100%
+        );
+        mask-image: linear-gradient(
+          to bottom,
+          transparent 0%,
+          black 22%,
+          black 78%,
+          transparent 100%
+        );
       }
 
       .service-card-inner {
@@ -400,10 +423,6 @@ const stats = [
         font-size: 0.875rem;
       }
 
-      .fade-mask-top,
-      .fade-mask-bottom {
-        height: 200px;
-      }
     }
   </style>
 
@@ -430,9 +449,8 @@ const stats = [
     function setActive(idx: number) {
       const CARD_H  = getCardH();
       const STEP    = CARD_H + GAP;
-      // Center within the card viewport (not the full window height).
-      // On mobile the viewport starts below the info strip, so offsetHeight
-      // gives us the true available height and centering is pixel-perfect.
+      // Center within the card viewport — uses offsetHeight so it's accurate
+      // on both mobile (viewport = flex:1 below info strip) and desktop (100dvh).
       const vpH     = vpEl?.offsetHeight ?? window.innerHeight;
       const centerY = vpH / 2 - CARD_H / 2;
 
@@ -482,18 +500,30 @@ const stats = [
       setActive(Math.round(progress * (TOTAL - 1)));
     }
 
-    // Position instantly first, then enable spring transition
     setActive(0);
     requestAnimationFrame(() => {
       track.style.transition = 'transform 0.55s cubic-bezier(0.32, 0.72, 0, 1)';
     });
 
+    // Apply will-change only while scrolling, release after idle — prevents
+    // the viewport's overflow:hidden from being permanently promoted to a
+    // GPU compositor layer that blocks the fixed ambient glow.
     let ticking = false;
+    let idleTimer: ReturnType<typeof setTimeout> | null = null;
     window.addEventListener('scroll', () => {
+      if (idleTimer) clearTimeout(idleTimer);
+      if (track) track.style.willChange = 'transform';
+      cards.forEach(c => { c.style.willChange = 'transform, opacity'; });
+
       if (!ticking) {
         requestAnimationFrame(() => { update(); ticking = false; });
         ticking = true;
       }
+
+      idleTimer = setTimeout(() => {
+        if (track) track.style.willChange = 'auto';
+        cards.forEach(c => { c.style.willChange = 'auto'; });
+      }, 200);
     }, { passive: true });
 
     window.addEventListener('resize', () => {
